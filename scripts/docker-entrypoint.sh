@@ -27,5 +27,5 @@ if [ "$1" = "ansible" ] || [ "$1" = "ansible-playbook" ]; then
   echo >&3 "$0: Configuration complete; ready for start up"
 fi
 
-echo >&3 "$0: Executing $@"
-exec "$@ ${ANSIBLE_ARGS:-}"
+echo >&3 "$0: Executing '$@' with args '${ANSIBLE_ARGS}'"
+exec "$@ ${ANSIBLE_ARGS}"

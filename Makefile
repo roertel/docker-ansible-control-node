@@ -1,4 +1,4 @@
-$(warning $(shell IMAGE_NAME=$(IMAGE_NAME) printenv | grep IMAGE_NAME))
+#$(warning $(shell IMAGE_NAME=$(IMAGE_NAME) printenv | grep IMAGE_NAME))
 ifndef IMAGE_NAME
 	#$(warning IMAGE_NAME is not set)
 	IMAGE_NAME=docker.io/roertel/ansible-control-node
