@@ -28,4 +28,11 @@ if [ "$1" = "ansible" ] || [ "$1" = "ansible-playbook" ]; then
 fi
 
 echo >&3 "$0: Executing '$@' with args '${ANSIBLE_ARGS}'"
-exec "$@ ${ANSIBLE_ARGS}"
+
+if [ -z "${NOEXIT:-}" ]; then
+  $@ ${ANSIBLE_ARGS}
+  echo "Entering infinite sleep"
+  sleep infinity
+else
+  exec $@ ${ANSIBLE_ARGS}
+fi
