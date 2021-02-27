@@ -12,6 +12,10 @@ RUN apk add --update-cache --quiet git screen vim ansible docker-py \
 COPY scripts /
 RUN chmod -f +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh
 
+# Set up the ansible user (so we don't use root)
+RUN groupadd -r ansible && useradd -r -g ansible ansible
+USER ansible
+
 # Set the entrypoint
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["ansible-playbook", "/usr/share/ansible/site.yaml"]
