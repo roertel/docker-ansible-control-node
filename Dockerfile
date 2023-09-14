@@ -4,7 +4,7 @@ LABEL maintainer="Ryan Oertel <638327+roertel@users.noreply.github.com>"
 VOLUME /etc/ansible
 VOLUME /usr/share/ansible
 
-RUN apk add --update-cache --quiet git screen vim ansible docker-py \
+RUN apk add --update-cache --quiet git ansible docker-py \
   openssh-client py3-dnspython ansible-lint && \
   rm -rf /var/lib/apk/db /var/cache/apk/*
 
@@ -13,7 +13,7 @@ COPY scripts /
 RUN chmod -f +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh
 
 # Set up the ansible user (so we don't use root)
-RUN groupadd -r ansible && useradd -r -g ansible ansible
+RUN addgroup ansible && adduser -DG ansible ansible
 USER ansible
 
 # Set the entrypoint
