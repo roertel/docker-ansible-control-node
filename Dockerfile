@@ -1,5 +1,5 @@
 FROM python:alpine
-LABEL maintainer="Ryan Oertel <ryan.oertel@gmail.com>"
+LABEL maintainer="Ryan Oertel <638327+roertel@users.noreply.github.com>"
 
 VOLUME /etc/ansible
 VOLUME /usr/share/ansible
