@@ -5,7 +5,7 @@ VOLUME /etc/ansible
 VOLUME /usr/share/ansible
 
 RUN apk add --update-cache --quiet git ansible docker-py \
-  openssh-client py3-dnspython ansible-lint && \
+  openssh-client py3-dnspython ansible-lint helm && \
   rm -rf /var/lib/apk/db /var/cache/apk/*
 
 # Copy in our entrypoint scripts

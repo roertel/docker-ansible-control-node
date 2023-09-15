@@ -3,5 +3,5 @@
 
 if [ -n "${PYTHON_MODULES:-}" ]; then
   echo "Installing extra python modules"
-  pip install --upgrade "${PYTHON_MODULES}"
+  pip install --upgrade ${PYTHON_MODULES//,/ }
 fi

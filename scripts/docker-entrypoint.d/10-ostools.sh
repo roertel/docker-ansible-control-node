@@ -3,6 +3,6 @@
 
 if [ -n "${EXTRA_TOOLS:-}" ]; then
   echo "Installing extra tools via apk"
-  apk add --update-cache --quiet ${EXTRA_TOOLS}
+  apk add --update-cache --quiet ${EXTRA_TOOLS//,/ }
   rm -rf /var/lib/apk/db /var/cache/apk/*
 fi
