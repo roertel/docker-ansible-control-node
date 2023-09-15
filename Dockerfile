@@ -17,5 +17,7 @@ RUN addgroup ansible && adduser -DG ansible ansible
 USER ansible
 
 # Set the entrypoint
+WORKDIR /usr/share/ansible
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["ansible-playbook", "/usr/share/ansible/site.yaml"]
+CMD ["ansible-playbook", "site.yaml"]
+

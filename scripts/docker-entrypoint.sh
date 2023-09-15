@@ -29,7 +29,7 @@ fi
 
 echo >&3 "$0: Executing '$@' with args '${ANSIBLE_ARGS}'"
 
-if [ -z "${NOEXIT:-}" ]; then
+if [ -n "${NOEXIT:-}" ]; then
   $@ ${ANSIBLE_ARGS}
   echo "Entering infinite sleep"
   sleep infinity
