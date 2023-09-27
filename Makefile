@@ -2,7 +2,7 @@
 ifndef IMAGE_NAME
 	#$(warning IMAGE_NAME is not set)
 	#IMAGE_NAME=docker.io/roertel/ansible-control-node
-	IMAGE_NAME=ghcr.io/roertel/ansible-control-node
+	IMAGE_NAME=ghcr.io/roertel/docker-ansible-control-node
 endif
 
 # If we have `--squash` support, then use it!
