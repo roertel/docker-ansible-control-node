@@ -1,23 +1,29 @@
-FROM python:alpine
+FROM debian:stable-slim
 LABEL maintainer="Ryan Oertel <638327+roertel@users.noreply.github.com>"
 
-VOLUME /etc/ansible
-VOLUME /usr/share/ansible
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apk add --update-cache --quiet git ansible docker-py openssh-client \
-  py3-dnspython ansible-lint helm py3-kubernetes py3-jsonpatch py3-yaml \
-  py3-netaddr py3-jmespath && rm -rf /var/lib/apk/db /var/cache/apk/*
+RUN apt-get update --quiet \
+&& apt-get install --quiet --assume-yes git ansible ansible-lint openssh-client \
+   python3-dnspython python3-kubernetes python3-jsonpatch python3-netaddr \
+   python3-boto3 \
+&& rm -rf /usr/local/bin/python/* /var/lib/apt/lists/*
 
 # Copy in our entrypoint scripts
 COPY scripts /
-RUN chmod -f +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh
+RUN chmod -f +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh \
+&& mkdir -p /etc/ansible \
+&& adduser ansible \
+&& chown -fR ansible:ansible /etc/ansible
 
 # Set up the ansible user (so we don't use root)
-RUN addgroup ansible && adduser -DG ansible ansible
 USER ansible
 
-# Set the entrypoint
+VOLUME /etc/ansible
+VOLUME /usr/share/ansible
 WORKDIR /usr/share/ansible
+
+# Set the entrypoint
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["ansible-playbook", "site.yaml"]
 
