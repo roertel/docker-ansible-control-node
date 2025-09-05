@@ -17,7 +17,7 @@ RUN chmod -f +x /docker-entrypoint.sh /docker-entrypoint.d/*.sh \
 && chown -fR ansible:ansible /etc/ansible
 
 # Set up the ansible user (so we don't use root)
-#USER ansible
+USER ansible
 
 VOLUME /etc/ansible
 VOLUME /usr/share/ansible
