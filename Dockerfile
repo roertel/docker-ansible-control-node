@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update --quiet \
 && apt-get install --quiet --assume-yes git ansible ansible-lint openssh-client \
    python3-dnspython python3-kubernetes python3-jsonpatch python3-netaddr \
-   python3-boto3 \
+   python3-boto3 helm \
 && rm -rf /usr/local/bin/python/* /var/lib/apt/lists/*
 
 # Copy in our entrypoint scripts
