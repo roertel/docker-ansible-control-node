@@ -4,6 +4,13 @@ LABEL maintainer="Ryan Oertel <638327+roertel@users.noreply.github.com>"
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update --quiet \
+&& apt-get install --quiet --assume-yes curl gpg apt-transport-https \
+&& curl -fsSL https://baltocdn.com/helm/signing.asc \
+   | gpg --dearmor > /usr/share/keyrings/helm.gpg \
+&& echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" \
+   > /etc/apt/sources.list.d/helm-stable-debian.list
+
+RUN apt-get update --quiet \
 && apt-get install --quiet --assume-yes git ansible ansible-lint openssh-client \
    python3-dnspython python3-kubernetes python3-jsonpatch python3-netaddr \
    python3-boto3 helm \
