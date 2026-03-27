@@ -5,7 +5,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update --quiet \
 && apt-get install --quiet --assume-yes curl gpg apt-transport-https \
-&& curl -fsSL https://baltocdn.com/helm/signing.asc \
 && curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey \
    | gpg --dearmor > /usr/share/keyrings/helm.gpg \
 && echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" \
